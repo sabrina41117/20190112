@@ -1,179 +1,171 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <script src="https://d3js.org/d3.v4.min.js"></script>
+<html><head><meta charset="utf-8">
     <style>
-
-            /*
-            .chart rect {
-              fill: steelblue;
-            }
-            */
-            .chart .legend {
-              fill: black;
-              font: 14px sans-serif;
-              text-anchor: start;
-              font-size: 12px;
-            }
-            
-            .chart text {
-              fill: white;
-              font: 10px sans-serif;
-              text-anchor: end;
-            }
-            
-            .chart .label {
-              fill: black;
-              font: 14px sans-serif;
-              text-anchor: end;
-            }
-            
-            .bar:hover {
-              fill: brown;
-            }
-            
-            .axis path,
-            .axis line {
-              fill: none;
-              stroke: #000;
-              shape-rendering: crispEdges;
-            }
-            
-            
-            </style>
-</head>
-<body>
     
-<script>
-<svg class="chart"></svg>
-
-
-var data = {
-  labels: [
-    'resilience', 'maintainability', 'accessibility',
-    'uptime', 'functionality', 'impact'
-  ],
-  series: [
-    {
-      label: '2012',
-      values: [4, 8, 15, 16, 23, 42]
-    },
-    {
-      label: '2013',
-      values: [12, 43, 22, 11, 73, 25]
-    },
-    {
-      label: '2014',
-      values: [31, 28, 14, 8, 15, 21]
-    },]
-};
-
-var chartWidth       = 300,
-    barHeight        = 20,
-    groupHeight      = barHeight * data.series.length,
-    gapBetweenGroups = 10,
-    spaceForLabels   = 150,
-    spaceForLegend   = 150;
-
-// Zip the series data together (first values, second values, etc.)
-var zippedData = [];
-for (var i=0; i<data.labels.length; i++) {
-  for (var j=0; j<data.series.length; j++) {
-    zippedData.push(data.series[j].values[i]);
-  }
-}
-
-// Color scale
-var color = d3.scale.category20();
-var chartHeight = barHeight * zippedData.length + gapBetweenGroups * data.labels.length;
-
-var x = d3.scale.linear()
-    .domain([0, d3.max(zippedData)])
-    .range([0, chartWidth]);
-
-var y = d3.scale.linear()
-    .range([chartHeight + gapBetweenGroups, 0]);
-
-var yAxis = d3.svg.axis()
-    .scale(y)
-    .tickFormat('')
-    .tickSize(0)
-    .orient("left");
-
-// Specify the chart area and dimensions
-var chart = d3.select(".chart")
-    .attr("width", spaceForLabels + chartWidth + spaceForLegend)
-    .attr("height", chartHeight);
-
-// Create bars
-var bar = chart.selectAll("g")
-    .data(zippedData)
-    .enter().append("g")
-    .attr("transform", function(d, i) {
-      return "translate(" + spaceForLabels + "," + (i * barHeight + gapBetweenGroups * (0.5 + Math.floor(i/data.series.length))) + ")";
-    });
-
-// Create rectangles of the correct width
-bar.append("rect")
-    .attr("fill", function(d,i) { return color(i % data.series.length); })
-    .attr("class", "bar")
-    .attr("width", x)
-    .attr("height", barHeight - 1);
-
-// Add text label in bar
-bar.append("text")
-    .attr("x", function(d) { return x(d) - 3; })
-    .attr("y", barHeight / 2)
-    .attr("fill", "red")
-    .attr("dy", ".35em")
-    .text(function(d) { return d; });
-
-// Draw labels
-bar.append("text")
-    .attr("class", "label")
-    .attr("x", function(d) { return - 10; })
-    .attr("y", groupHeight / 2)
-    .attr("dy", ".35em")
-    .text(function(d,i) {
-      if (i % data.series.length === 0)
-        return data.labels[Math.floor(i/data.series.length)];
-      else
-        return ""});
-
-chart.append("g")
-      .attr("class", "y axis")
-      .attr("transform", "translate(" + spaceForLabels + ", " + -gapBetweenGroups/2 + ")")
-      .call(yAxis);
-
-// Draw legend
-var legendRectSize = 18,
-    legendSpacing  = 4;
-
-var legend = chart.selectAll('.legend')
-    .data(data.series)
-    .enter()
-    .append('g')
-    .attr('transform', function (d, i) {
-        var height = legendRectSize + legendSpacing;
-        var offset = -gapBetweenGroups/2;
-        var horz = spaceForLabels + chartWidth + 40 - legendRectSize;
-        var vert = i * height - offset;
-        return 'translate(' + horz + ',' + vert + ')';
-    });
-
-legend.append('rect')
-    .attr('width', legendRectSize)
-    .attr('height', legendRectSize)
-    .style('fill', function (d, i) { return color(i); })
-    .style('stroke', function (d, i) { return color(i); });
-
-legend.append('text')
-    .attr('class', 'legend')
-    .attr('x', legendRectSize + legendSpacing)
-    .attr('y', legendRectSize - legendSpacing)
-    .text(function (d) { return d.label; });
-
-</script>
-
-</body>
-</html>
+    /*
+    .chart rect {
+      fill: steelblue;
+    }
+    */
+    .chart .legend {
+      fill: black;
+      font: 14px sans-serif;
+      text-anchor: start;
+      font-size: 12px;
+    }
+    
+    .chart text {
+      fill: white;
+      font: 10px sans-serif;
+      text-anchor: end;
+    }
+    
+    .chart .label {
+      fill: black;
+      font: 14px sans-serif;
+      text-anchor: end;
+    }
+    
+    .bar:hover {
+      fill: brown;
+    }
+    
+    .axis path,
+    .axis line {
+      fill: none;
+      stroke: #000;
+      shape-rendering: crispEdges;
+    }
+    
+    
+    </style>
+    </head><body><svg class="chart" width="600" height="420"><g transform="translate(150,5)"><rect fill="#1f77b4" class="bar" width="16.43835616438356" height="19"></rect><text x="13.43835616438356" y="10" fill="red" dy=".35em">4</text><text class="label" x="-10" y="30" dy=".35em">resilience</text></g><g transform="translate(150,25)"><rect fill="#aec7e8" class="bar" width="49.31506849315068" height="19"></rect><text x="46.31506849315068" y="10" fill="red" dy=".35em">12</text><text class="label" x="-10" y="30" dy=".35em"></text></g><g transform="translate(150,45)"><rect fill="#ff7f0e" class="bar" width="127.39726027397259" height="19"></rect><text x="124.39726027397259" y="10" fill="red" dy=".35em">31</text><text class="label" x="-10" y="30" dy=".35em"></text></g><g transform="translate(150,75)"><rect fill="#1f77b4" class="bar" width="32.87671232876712" height="19"></rect><text x="29.87671232876712" y="10" fill="red" dy=".35em">8</text><text class="label" x="-10" y="30" dy=".35em">maintainability</text></g><g transform="translate(150,95)"><rect fill="#aec7e8" class="bar" width="176.7123287671233" height="19"></rect><text x="173.7123287671233" y="10" fill="red" dy=".35em">43</text><text class="label" x="-10" y="30" dy=".35em"></text></g><g transform="translate(150,115)"><rect fill="#ff7f0e" class="bar" width="115.06849315068493" height="19"></rect><text x="112.06849315068493" y="10" fill="red" dy=".35em">28</text><text class="label" x="-10" y="30" dy=".35em"></text></g><g transform="translate(150,145)"><rect fill="#1f77b4" class="bar" width="61.64383561643835" height="19"></rect><text x="58.64383561643835" y="10" fill="red" dy=".35em">15</text><text class="label" x="-10" y="30" dy=".35em">accessibility</text></g><g transform="translate(150,165)"><rect fill="#aec7e8" class="bar" width="90.41095890410958" height="19"></rect><text x="87.41095890410958" y="10" fill="red" dy=".35em">22</text><text class="label" x="-10" y="30" dy=".35em"></text></g><g transform="translate(150,185)"><rect fill="#ff7f0e" class="bar" width="57.534246575342465" height="19"></rect><text x="54.534246575342465" y="10" fill="red" dy=".35em">14</text><text class="label" x="-10" y="30" dy=".35em"></text></g><g transform="translate(150,215)"><rect fill="#1f77b4" class="bar" width="65.75342465753424" height="19"></rect><text x="62.75342465753424" y="10" fill="red" dy=".35em">16</text><text class="label" x="-10" y="30" dy=".35em">uptime</text></g><g transform="translate(150,235)"><rect fill="#aec7e8" class="bar" width="45.20547945205479" height="19"></rect><text x="42.20547945205479" y="10" fill="red" dy=".35em">11</text><text class="label" x="-10" y="30" dy=".35em"></text></g><g transform="translate(150,255)"><rect fill="#ff7f0e" class="bar" width="32.87671232876712" height="19"></rect><text x="29.87671232876712" y="10" fill="red" dy=".35em">8</text><text class="label" x="-10" y="30" dy=".35em"></text></g><g transform="translate(150,285)"><rect fill="#1f77b4" class="bar" width="94.52054794520548" height="19"></rect><text x="91.52054794520548" y="10" fill="red" dy=".35em">23</text><text class="label" x="-10" y="30" dy=".35em">functionality</text></g><g transform="translate(150,305)"><rect fill="#aec7e8" class="bar" width="300" height="19"></rect><text x="297" y="10" fill="red" dy=".35em">73</text><text class="label" x="-10" y="30" dy=".35em"></text></g><g transform="translate(150,325)"><rect fill="#ff7f0e" class="bar" width="61.64383561643835" height="19"></rect><text x="58.64383561643835" y="10" fill="red" dy=".35em">15</text><text class="label" x="-10" y="30" dy=".35em"></text></g><g transform="translate(150,355)"><rect fill="#1f77b4" class="bar" width="172.60273972602738" height="19"></rect><text x="169.60273972602738" y="10" fill="red" dy=".35em">42</text><text class="label" x="-10" y="30" dy=".35em">impact</text></g><g transform="translate(150,375)"><rect fill="#aec7e8" class="bar" width="102.73972602739725" height="19"></rect><text x="99.73972602739725" y="10" fill="red" dy=".35em">25</text><text class="label" x="-10" y="30" dy=".35em"></text></g><g transform="translate(150,395)"><rect fill="#ff7f0e" class="bar" width="86.30136986301369" height="19"></rect><text x="83.30136986301369" y="10" fill="red" dy=".35em">21</text><text class="label" x="-10" y="30" dy=".35em"></text></g><g class="y axis" transform="translate(150, -5)"><g class="tick" transform="translate(0,430)" style="opacity: 1;"><line x2="0" y2="0"></line><text dy=".32em" x="-3" y="0" style="text-anchor: end;"></text></g><g class="tick" transform="translate(0,387)" style="opacity: 1;"><line x2="0" y2="0"></line><text dy=".32em" x="-3" y="0" style="text-anchor: end;"></text></g><g class="tick" transform="translate(0,344)" style="opacity: 1;"><line x2="0" y2="0"></line><text dy=".32em" x="-3" y="0" style="text-anchor: end;"></text></g><g class="tick" transform="translate(0,301)" style="opacity: 1;"><line x2="0" y2="0"></line><text dy=".32em" x="-3" y="0" style="text-anchor: end;"></text></g><g class="tick" transform="translate(0,258)" style="opacity: 1;"><line x2="0" y2="0"></line><text dy=".32em" x="-3" y="0" style="text-anchor: end;"></text></g><g class="tick" transform="translate(0,215)" style="opacity: 1;"><line x2="0" y2="0"></line><text dy=".32em" x="-3" y="0" style="text-anchor: end;"></text></g><g class="tick" transform="translate(0,172)" style="opacity: 1;"><line x2="0" y2="0"></line><text dy=".32em" x="-3" y="0" style="text-anchor: end;"></text></g><g class="tick" transform="translate(0,129.00000000000003)" style="opacity: 1;"><line x2="0" y2="0"></line><text dy=".32em" x="-3" y="0" style="text-anchor: end;"></text></g><g class="tick" transform="translate(0,85.99999999999999)" style="opacity: 1;"><line x2="0" y2="0"></line><text dy=".32em" x="-3" y="0" style="text-anchor: end;"></text></g><g class="tick" transform="translate(0,42.99999999999999)" style="opacity: 1;"><line x2="0" y2="0"></line><text dy=".32em" x="-3" y="0" style="text-anchor: end;"></text></g><g class="tick" transform="translate(0,0)" style="opacity: 1;"><line x2="0" y2="0"></line><text dy=".32em" x="-3" y="0" style="text-anchor: end;"></text></g><path class="domain" d="M0,0H0V430H0"></path></g><g transform="translate(472,5)"><rect width="18" height="18" style="fill: rgb(31, 119, 180); stroke: rgb(31, 119, 180);"></rect><text class="legend" x="22" y="14">2012</text></g><g transform="translate(472,27)"><rect width="18" height="18" style="fill: rgb(174, 199, 232); stroke: rgb(174, 199, 232);"></rect><text class="legend" x="22" y="14">2013</text></g><g transform="translate(472,49)"><rect width="18" height="18" style="fill: rgb(255, 127, 14); stroke: rgb(255, 127, 14);"></rect><text class="legend" x="22" y="14">2014</text></g></svg>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script>
+    
+    var data = {
+      labels: [
+        'resilience', 'maintainability', 'accessibility',
+        'uptime', 'functionality', 'impact'
+      ],
+      series: [
+        {
+          label: '2012',
+          values: [4, 8, 15, 16, 23, 42]
+        },
+        {
+          label: '2013',
+          values: [12, 43, 22, 11, 73, 25]
+        },
+        {
+          label: '2014',
+          values: [31, 28, 14, 8, 15, 21]
+        },]
+    };
+    
+    var chartWidth       = 300,
+        barHeight        = 20,
+        groupHeight      = barHeight * data.series.length,
+        gapBetweenGroups = 10,
+        spaceForLabels   = 150,
+        spaceForLegend   = 150;
+    
+    // Zip the series data together (first values, second values, etc.)
+    var zippedData = [];
+    for (var i=0; i<data.labels.length; i++) {
+      for (var j=0; j<data.series.length; j++) {
+        zippedData.push(data.series[j].values[i]);
+      }
+    }
+    
+    // Color scale
+    var color = d3.scale.category20();
+    var chartHeight = barHeight * zippedData.length + gapBetweenGroups * data.labels.length;
+    
+    var x = d3.scale.linear()
+        .domain([0, d3.max(zippedData)])
+        .range([0, chartWidth]);
+    
+    var y = d3.scale.linear()
+        .range([chartHeight + gapBetweenGroups, 0]);
+    
+    var yAxis = d3.svg.axis()
+        .scale(y)
+        .tickFormat('')
+        .tickSize(0)
+        .orient("left");
+    
+    // Specify the chart area and dimensions
+    var chart = d3.select(".chart")
+        .attr("width", spaceForLabels + chartWidth + spaceForLegend)
+        .attr("height", chartHeight);
+    
+    // Create bars
+    var bar = chart.selectAll("g")
+        .data(zippedData)
+        .enter().append("g")
+        .attr("transform", function(d, i) {
+          return "translate(" + spaceForLabels + "," + (i * barHeight + gapBetweenGroups * (0.5 + Math.floor(i/data.series.length))) + ")";
+        });
+    
+    // Create rectangles of the correct width
+    bar.append("rect")
+        .attr("fill", function(d,i) { return color(i % data.series.length); })
+        .attr("class", "bar")
+        .attr("width", x)
+        .attr("height", barHeight - 1);
+    
+    // Add text label in bar
+    bar.append("text")
+        .attr("x", function(d) { return x(d) - 3; })
+        .attr("y", barHeight / 2)
+        .attr("fill", "red")
+        .attr("dy", ".35em")
+        .text(function(d) { return d; });
+    
+    // Draw labels
+    bar.append("text")
+        .attr("class", "label")
+        .attr("x", function(d) { return - 10; })
+        .attr("y", groupHeight / 2)
+        .attr("dy", ".35em")
+        .text(function(d,i) {
+          if (i % data.series.length === 0)
+            return data.labels[Math.floor(i/data.series.length)];
+          else
+            return ""});
+    
+    chart.append("g")
+          .attr("class", "y axis")
+          .attr("transform", "translate(" + spaceForLabels + ", " + -gapBetweenGroups/2 + ")")
+          .call(yAxis);
+    
+    // Draw legend
+    var legendRectSize = 18,
+        legendSpacing  = 4;
+    
+    var legend = chart.selectAll('.legend')
+        .data(data.series)
+        .enter()
+        .append('g')
+        .attr('transform', function (d, i) {
+            var height = legendRectSize + legendSpacing;
+            var offset = -gapBetweenGroups/2;
+            var horz = spaceForLabels + chartWidth + 40 - legendRectSize;
+            var vert = i * height - offset;
+            return 'translate(' + horz + ',' + vert + ')';
+        });
+    
+    legend.append('rect')
+        .attr('width', legendRectSize)
+        .attr('height', legendRectSize)
+        .style('fill', function (d, i) { return color(i); })
+        .style('stroke', function (d, i) { return color(i); });
+    
+    legend.append('text')
+        .attr('class', 'legend')
+        .attr('x', legendRectSize + legendSpacing)
+        .attr('y', legendRectSize - legendSpacing)
+        .text(function (d) { return d.label; });
+    
+    </script>
+    </body></html>
