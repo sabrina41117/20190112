@@ -17,9 +17,10 @@
         }
     </style>
     <script src="https://d3js.org/d3.v4.min.js"></script>
+    <meta charset="utf8">
 </head>
 <body>
-    <svg width="500" height="400"></svg>
+    <svg width="500" height="600"></svg>
     <script>
 
         var svg = d3.select("svg"),
@@ -67,9 +68,9 @@
             });
 
             svg.append("g")
-               .attr("transform", "translate(" + (width / 2 - 120) + "," + 20 + ")")
+               .attr("transform", "translate(" + (width / 2 - 120) + "," + 50 + ")")
                .append("text")
-               .text("Browser use statistics - Jan 2017")
+               .text("台北市第11屆里長選舉中有公告政治獻金結餘之比例")
                .attr("class", "title")
     </script>
 </body>
