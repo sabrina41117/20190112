@@ -15,36 +15,44 @@
 				{
 					"type": "pie",
 					"balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>",
-					"depth3D": 3,
-					"innerRadius": -1,
-					"minRadius": 0,
-					"pieX": 500,
+					"innerRadius": 0,
+					"labelRadius": 58,
+					"minRadius": 90,
+					"pieX": 200,
 					"pieY": 200,
 					"pullOutRadius": 4,
-					"startAngle": 165.6,
+					"startAngle": 154.8,
 					"startRadius": "488%",
 					"labelsEnabled": false,
 					"marginBottom": 30,
-					"marginLeft": 500,
-					"marginRight": 200,
-					"marginTop": 50,
-					"maxLabelWidth": 95,
 					"pullOutDuration": 0,
-					"tabIndex": 3,
+					"tabIndex": 12,
 					"titleField": "category",
 					"valueField": "column-1",
+					"backgroundAlpha": 0.8,
 					"allLabels": [],
 					"balloon": {},
 					"legend": {
 						"enabled": true,
 						"align": "center",
-						"markerType": "circle"
+						"labelWidth": 0,
+						"markerType": "circle",
+						"tabIndex": 0,
+						"valueWidth": 10
 					},
-					"titles": [],
+					"titles": [
+						{
+							"color": "#008000",
+							"id": "Title-1",
+							"size": 20,
+							"tabIndex": 1,
+							"text": "台北市第11屆里長選舉中有公告政治獻金結餘之比例"
+						}
+					],
 					"dataProvider": [
 						{
 							"category": "松山區",
-							"column-1": "松山區,0"
+							"column-1": "0"
 						},
 						{
 							"category": "信義區",
